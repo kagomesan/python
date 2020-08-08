@@ -3,10 +3,12 @@
 
 import time, sys, os
 sys.path.append('/usr/lib/python3.8/site-packages')
+
 import pexpect
+import getpass
 
 id = raw_input('id: ')
-pw = raw_input('password: ')
+pw = getpass.getpass()
 
 f = open('list.txt', 'r')
 
@@ -24,11 +26,14 @@ for line in f:
     child.sendline('get system session status')
 
     line = line.strip()
-    fout = open( line + '_result.txt','w')
+    fn = line + '_result.txt'
+    spath = os.path.join('./log',fn)
+    fout = open( spath,'w')
     child.logfile = fout
 
     child.expect('# ')
     child.sendline('exit\n')
     child.close()
     child.logfile.close()
-f.close()
+    print line + ' done'
+f.close() 
