@@ -15,8 +15,11 @@ f = open('list.txt', 'r')
 for line in f:
 
     child = pexpect.spawn('telnet ' + line)
+    
+    expect_list = [u'Username:',
+                   u'login:']
 
-    child.expect('login:')
+    child.expect(expect_list)
     child.sendline(id)
 
     child.expect('Password:')
@@ -36,4 +39,4 @@ for line in f:
     child.close()
     child.logfile.close()
     print line + ' done'
-f.close() 
+f.close()
