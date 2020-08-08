@@ -1,8 +1,9 @@
 #!/usr/bin/env python 
 # -*- coding: utf-8 -*-
- 
-import pexpect
+
 import time, sys, os
+sys.path.append('/usr/lib/python3.8/site-packages')
+import pexpect
 
 id = raw_input('id: ')
 pw = raw_input('password: ')
