@@ -25,18 +25,19 @@ for line in f:
     child.expect('Password:')
     child.sendline(pw)
 
-    child.expect('# ')
+    line = line.strip()
+    str = line + ' #'
+    child.expect(str)
     child.sendline('get system session status')
 
-    line = line.strip()
     fn = line + '_result.txt'
     spath = os.path.join('./log',fn)
     fout = open( spath,'w')
     child.logfile = fout
 
-    child.expect('# ')
+    child.expect(str)
     child.sendline('exit\n')
     child.close()
     child.logfile.close()
     print line + ' done'
-f.close()
+f.close() 
